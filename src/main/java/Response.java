@@ -1,32 +1,25 @@
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Response {
-    @JsonProperty("copyright")
+
     private String copyright;
-    @JsonProperty("date")
     private String date;
-    @JsonProperty("explanation")
     private String explanation;
-    @JsonProperty("hdurl")
     private String hdurl;
-    @JsonProperty("media_type")
     private String mediaType;
 
-    @JsonProperty("service_version")
     private String serviceVersion;
-    @JsonProperty("title")
     private String title;
-    @JsonProperty("url")
     private String url;
 
-    public Response(String copyright,
-                    String date,
-                    String explanation,
-                    String hdurl,
-                    String mediaType,
-                    String serviceVersion,
-                    String title,
-                    String url) {
+    public Response(@JsonProperty("copyright") String copyright,
+                    @JsonProperty("date") String date,
+                    @JsonProperty("explanation") String explanation,
+                    @JsonProperty("hdurl") String hdurl,
+                    @JsonProperty("media_type") String mediaType,
+                    @JsonProperty("service_version") String serviceVersion,
+                    @JsonProperty("title") String title,
+                    @JsonProperty("url") String url) {
         this.copyright = copyright;
         this.date = date;
         this.explanation = explanation;
