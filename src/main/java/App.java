@@ -8,10 +8,12 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
+import java.util.List;
 
 public class App {
     public static ObjectMapper mapper = new ObjectMapper();
-    final private static String URI = "https://raw.githubusercontent.com/netology-code/jd-homeworks/master/http/task1/cats";
+    final private static String URI = "https://api.nasa.gov/planetary/apod?api_key=ntXjctiHfVVq7fA4U1wPsPOZliVyTY1Yeyc2bXCM";
 
     public static void main(String[] args) throws IOException {
         CloseableHttpClient httpClient = HttpClientBuilder.create()
@@ -22,17 +24,11 @@ public class App {
                         .build())
                 .build();
 
-        HttpGet request = new HttpGet("https://api.nasa.gov/planetary/apod?api_key=ntXjctiHfVVq7fA4U1wPsPOZliVyTY1Yeyc2bXCM");
+        HttpGet request = new HttpGet(URI);
         CloseableHttpResponse response = httpClient.execute(request);
-        String body = new String(response.getEntity().getContent().readAllBytes(), StandardCharsets.UTF_8);
-        System.out.println(body);
-
-//        HttpGet request = new HttpGet(URI);
-//        CloseableHttpResponse response = httpClient.execute(request);
-//
-//        List<Response> responses = mapper.readValue(response.getEntity().getContent(), new TypeReference<>() {});
-//        Stream<Response> stream = responses.stream();
-//        responses= stream.filter(value -> value.getUpvotes() != null && Integer.parseInt(value.getUpvotes()) > 0).toList();
-//        System.out.println(responses);
+//        String body = new String(response.getEntity().getContent().readAllBytes(), StandardCharsets.UTF_8);
+//        System.out.println(body);
+        List<Response> responsesList = mapper.readValue(response.getEntity().getContent(), new TypeReference<>() {});
+        System.out.println(responsesList);
     }
 }
